@@ -256,36 +256,120 @@ def sun_sky(d, box):
 
 # ---------------------------------------------------------------- scenes
 def scene_sea_warship(d, box):
-    """Lead 1: listing corvette at dawn off Libya — bright, detailed."""
+    """Lead 1: listing corvette hit off Benghazi — rich daylight scene."""
     x0, y0, x1, y1 = box
     sun_sky(d, box)
-    d.polygon([(x0, y1 - 34), (x0 + 60, y1 - 52), (x1 - 40, y1 - 46),
-               (x1, y1 - 30), (x1, y1), (x0, y1)], fill="#C9B18A")
-    d.text((x0 + 272, y1 - 26), "BENGHAZI", font=font(FB, 7), fill="#7A6A45")
-    for i in range(y1 - 26, y1):
-        t = (i - (y1 - 26)) / 26.0
+    # extra clouds + birds in the layered sky
+    for cx, cy, w in [(x0 + 96, y0 + 16, 34), (x0 + 176, y0 + 8, 26),
+                      (x0 + 44, y0 + 34, 26), (x0 + 210, y0 + 30, 30)]:
+        d.ellipse([cx, cy, cx + w, cy + 8], fill="#FFFFFF")
+        d.ellipse([cx + 7, cy - 4, cx + w - 5, cy + 4], fill="#FFFFFF")
+    for bx, by in [(x0 + 150, y0 + 22), (x0 + 162, y0 + 26), (x0 + 240, y0 + 18)]:
+        d.line([(bx, by), (bx + 4, by - 3), (bx + 8, by)], fill="#4A5568", width=1)
+    # distant headland + shoreline band (Benghazi coast)
+    d.polygon([(x0, y1 - 46), (x0 + 70, y1 - 58), (x0 + 150, y1 - 50),
+               (x0 + 210, y1 - 44), (x0 + 260, y1 - 48), (x1, y1 - 42),
+               (x1, y1 - 38), (x0, y1 - 38)], fill="#B7A67E")
+    d.polygon([(x0, y1 - 40), (x1, y1 - 40), (x1, y1 - 34), (x0, y1 - 34)],
+              fill="#C9B18A")
+    # shoreline town: blocky buildings with windows, dome + minaret
+    for bx, bw, bh in [(6, 14, 10), (24, 10, 8), (40, 16, 12),
+                       (252, 12, 9), (268, 14, 11)]:
+        d.rectangle([x0 + bx, y1 - 40 - bh, x0 + bx + bw, y1 - 40],
+                    fill="#EFE6CC", outline="#8A7D5F", width=1)
+        for wx in range(x0 + bx + 3, x0 + bx + bw - 2, 5):
+            d.rectangle([wx, y1 - 40 - bh + 3, wx + 2, y1 - 40 - bh + 6],
+                        fill="#5B7A94")
+    d.pieslice([x0 + 58, y1 - 56, x0 + 74, y1 - 40], 180, 360, fill="#B03A2E")
+    d.rectangle([x0 + 78, y1 - 62, x0 + 82, y1 - 40], fill="#EFE6CC",
+                outline="#8A7D5F", width=1)
+    d.polygon([(x0 + 77, y1 - 62), (x0 + 80, y1 - 68), (x0 + 83, y1 - 62)],
+              fill="#B03A2E")
+    # lighthouse at the right end of the coast, pale beam to the left
+    d.polygon([(x0 + 296, y1 - 62), (x0 + 250, y1 - 56), (x0 + 250, y1 - 52),
+               (x0 + 296, y1 - 56)], fill="#FFF3B0")
+    d.rectangle([x0 + 296, y1 - 64, x0 + 304, y1 - 40], fill="#FFFFFF",
+                outline="#8A7D5F", width=1)
+    d.rectangle([x0 + 296, y1 - 58, x0 + 304, y1 - 54], fill="#B91C1C")
+    d.rectangle([x0 + 296, y1 - 48, x0 + 304, y1 - 44], fill="#B91C1C")
+    d.rectangle([x0 + 298, y1 - 68, x0 + 302, y1 - 64], fill="#1F2937")
+    # sea, gradient from the shoreline down
+    for i in range(y1 - 38, y1):
+        t = (i - (y1 - 38)) / 38.0
         d.line([(x0, i), (x1, i)],
                fill=(int(58 + 30 * t), int(122 + 30 * t), int(168 + 20 * t)))
-    for wx in (x0 + 30, x0 + 150, x0 + 250):
-        d.arc([wx, y1 - 14, wx + 44, y1 - 2], 180, 360, fill="#DFF2FA", width=2)
-    # listing grey corvette, bow down
+    d.text((x0 + 272, y1 - 26), "BENGHAZI", font=font(FB, 7), fill="#FFE9B8")
+    # sun glitter on the water, below the label
+    for gx, gy, gl in [(x0 + 276, y1 - 14, 22), (x0 + 282, y1 - 9, 14),
+                       (x0 + 272, y1 - 4, 26)]:
+        d.line([(gx, gy), (gx + gl, gy)], fill="#FFE08A", width=2)
+    # wave crests
+    for wx, wy in [(x0 + 18, y1 - 12), (x0 + 120, y1 - 8), (x0 + 196, y1 - 14),
+                   (x0 + 40, y1 - 8)]:
+        d.arc([wx, wy, wx + 36, wy + 10], 180, 360, fill="#DFF2FA", width=2)
+    # small patrol boat, far left, with a wake
+    d.polygon([(x0 + 10, y1 - 28), (x0 + 38, y1 - 28), (x0 + 34, y1 - 22),
+               (x0 + 14, y1 - 22)], fill="#5B6670")
+    d.rectangle([x0 + 20, y1 - 34, x0 + 30, y1 - 28], fill="#78828C")
+    for wx in range(x0 + 44, x0 + 68, 8):
+        d.line([(wx, y1 - 27), (wx + 5, y1 - 27)], fill="#FFFFFF", width=1)
+    # listing grey corvette, bow down, hit at the stern
     d.polygon([(x0 + 78, y1 - 52), (x0 + 232, y1 - 44), (x0 + 244, y1 - 30),
                (x0 + 70, y1 - 30)], fill="#5B6670")
+    d.polygon([(x0 + 71, y1 - 34), (x0 + 243, y1 - 34), (x0 + 244, y1 - 30),
+               (x0 + 70, y1 - 30)], fill="#8C2F26")
+    d.line([(x0 + 78, y1 - 52), (x0 + 232, y1 - 44)], fill="#E8EDF2", width=2)
     d.rectangle([x0 + 120, y1 - 66, x0 + 178, y1 - 50], fill="#78828C")
-    d.rectangle([x0 + 138, y1 - 78, x0 + 150, y1 - 66], fill="#78828C")
+    d.rectangle([x0 + 132, y1 - 76, x0 + 168, y1 - 66], fill="#8A949E")
+    for wx in range(x0 + 136, x0 + 166, 10):
+        d.rectangle([wx, y1 - 74, wx + 6, y1 - 69], fill="#BFE0F2")
+    # mast, radar bar, antenna + flag
+    d.line([(x0 + 150, y1 - 92), (x0 + 150, y1 - 76)], fill="#3E4750", width=2)
+    d.line([(x0 + 140, y1 - 90), (x0 + 160, y1 - 88)], fill="#3E4750", width=2)
+    d.line([(x0 + 150, y1 - 92), (x0 + 150, y1 - 100)], fill="#3E4750", width=1)
+    d.polygon([(x0 + 150, y1 - 100), (x0 + 160, y1 - 97), (x0 + 150, y1 - 94)],
+              fill="#B91C1C")
+    # funnel with a yellow band
+    d.rectangle([x0 + 182, y1 - 64, x0 + 196, y1 - 50], fill="#3E4750")
+    d.rectangle([x0 + 182, y1 - 64, x0 + 196, y1 - 60], fill="#FFD94D")
+    # bow gun turret + barrel
     d.polygon([(x0 + 200, y1 - 62), (x0 + 206, y1 - 62), (x0 + 203, y1 - 44)],
               fill="#3E4750")
+    d.polygon([(x0 + 204, y1 - 56), (x0 + 218, y1 - 62), (x0 + 218, y1 - 58),
+               (x0 + 206, y1 - 52)], fill="#3E4750")
+    # lit portholes along the hull
     for px in range(x0 + 84, x0 + 232, 16):
         d.rectangle([px, y1 - 42, px + 7, y1 - 36], fill="#FFD94D")
-    # smoke column, pale grey (daylight, not night)
-    for i, (sx, sy, sr) in enumerate([(x0 + 96, y1 - 84, 10), (x0 + 88, y1 - 98, 13),
-                                      (x0 + 80, y1 - 112, 15)]):
-        d.ellipse([sx - sr, sy - sr, sx + sr, sy + sr], fill="#C9CDD2")
-    # two small drones in the sky
-    for dx, dy in [(x0 + 40, y0 + 44), (x0 + 268, y0 + 36)]:
+    # bow wave + stern wake foam (kept clear of the BENGHAZI label)
+    d.arc([x0 + 228, y1 - 24, x0 + 262, y1 - 10], 180, 360, fill="#FFFFFF", width=2)
+    d.arc([x0 + 238, y1 - 18, x0 + 264, y1 - 6], 180, 360, fill="#DFF2FA", width=2)
+    # orange lifeboat + buoy in the water, right of the ship
+    d.polygon([(x0 + 244, y1 - 22), (x0 + 262, y1 - 22), (x0 + 258, y1 - 16),
+               (x0 + 248, y1 - 16)], fill="#EA580C")
+    d.ellipse([x0 + 250, y1 - 26, x0 + 253, y1 - 22], fill="#1F2937")
+    d.ellipse([x0 + 306, y1 - 12, x0 + 312, y1 - 6], fill="#B91C1C")
+    # hit fire at the stern + smoke column drifting left
+    d.polygon([(x0 + 92, y1 - 52), (x0 + 100, y1 - 70), (x0 + 106, y1 - 58),
+               (x0 + 112, y1 - 66), (x0 + 114, y1 - 52)], fill="#F97316")
+    d.polygon([(x0 + 98, y1 - 52), (x0 + 102, y1 - 62), (x0 + 108, y1 - 52)],
+              fill="#FBBF24")
+    for sx, sy, sr in [(x0 + 100, y1 - 78, 9), (x0 + 92, y1 - 90, 11),
+                       (x0 + 88, y1 - 94, 7)]:
+        d.ellipse([sx - sr, sy - sr, sx + sr, sy + sr], fill="#C9CDD2",
+                  outline="#9AA0A6", width=1)
+    # funnel smoke, thinner, drifting right
+    for sx, sy, sr in [(x0 + 192, y1 - 72, 6), (x0 + 200, y1 - 82, 8),
+                       (x0 + 210, y1 - 92, 9)]:
+        d.ellipse([sx - sr, sy - sr, sx + sr, sy + sr], fill="#D8DBDE")
+    # three drones with rotors, red lights, dashed flight path
+    for dx, dy in [(x0 + 40, y0 + 44), (x0 + 268, y0 + 36), (x0 + 150, y0 + 30)]:
+        d.line([(dx - 12, dy - 8), (dx + 12, dy - 8)], fill="#9AA0A6", width=1)
         d.ellipse([dx - 5, dy - 2, dx + 5, dy + 2], fill="#222222")
         d.line([(dx - 9, dy - 3), (dx + 9, dy - 3)], fill="#222222", width=1)
         d.line([(dx, dy + 2), (dx + 4, dy + 9)], fill="#9AA0A6", width=1)
+        d.ellipse([dx + 3, dy - 4, dx + 6, dy - 1], fill="#DC2626")
+    for x in range(x0 + 52, x0 + 78, 8):
+        d.line([(x, y0 + 42), (x + 4, y0 + 42)], fill="#9AA0A6", width=1)
 
 
 def scene_hormuz_map(d, box):
@@ -369,15 +453,60 @@ def mini_scene(d, box, num):
                   fill="#5B6670")
         d.polygon([(x0 + 62, y0 + 24), (x0 + 48, y0 + 28), (x0 + 62, y0 + 30)],
                   fill="#5B6670")
-    elif num == 5:  # Kyiv in daylight: city + drones + smoke, bright sky
-        d.rectangle([x0, mid_y, x1, y1], fill="#B9A88A")
-        for i, bh in enumerate([16, 24, 12, 20]):
-            bx = x0 + 12 + i * 36
-            d.rectangle([bx, mid_y - bh, bx + 26, mid_y], fill="#8A7D6B")
-        for dx, dy in [(x0 + 30, y0 + 16), (x0 + 120, y0 + 10)]:
+    elif num == 5:  # 96 drones: bright dusk sky, lit city, tracers, bursts
+        # dusk gradient — pale peach to gold, bright, never a dark panel
+        for i in range(y1 - y0):
+            t = i / max(1, (y1 - y0))
+            d.line([(x0, y0 + i), (x1, y0 + i)],
+                   fill=(int(253 - 8 * t), int(226 - 46 * t), int(178 - 28 * t)))
+        # low sun on the horizon, right (drawn before the skyline, so it
+        # sets behind the buildings)
+        d.ellipse([x1 - 26, mid_y - 14, x1 - 10, mid_y + 2], fill="#FFE08A",
+                  outline="#E8A90C", width=1)
+        # searchlight beams, pale gold, behind the skyline
+        d.polygon([(x0 + 22, mid_y), (x0 + 52, y0 + 4), (x0 + 60, y0 + 4),
+                   (x0 + 34, mid_y)], fill="#FFF3B0")
+        d.polygon([(x0 + 118, mid_y), (x0 + 96, y0 + 8), (x0 + 102, y0 + 8),
+                   (x0 + 126, mid_y)], fill="#FFF3B0")
+        # skyline, warm mid-tones, with MANY lit windows
+        for bx, bw, bh in [(4, 18, 14), (26, 14, 20), (44, 20, 12),
+                           (68, 16, 18), (88, 14, 11), (106, 18, 16),
+                           (128, 16, 13)]:
+            d.rectangle([x0 + bx, mid_y - bh, x0 + bx + bw, mid_y],
+                        fill="#7A6A55")
+            for wy in range(mid_y - bh + 3, mid_y - 2, 5):
+                for wx in range(x0 + bx + 3, x0 + bx + bw - 2, 5):
+                    d.rectangle([wx, wy, wx + 2, wy + 2], fill="#FFD94D")
+        # tower with a lit spire, centre
+        d.rectangle([x0 + 66, mid_y - 26, x0 + 72, mid_y], fill="#5C5348")
+        d.polygon([(x0 + 65, mid_y - 26), (x0 + 69, mid_y - 32),
+                   (x0 + 73, mid_y - 26)], fill="#5C5348")
+        d.rectangle([x0 + 68, mid_y - 24, x0 + 70, mid_y - 22], fill="#FFD94D")
+        # ground band
+        d.rectangle([x0, mid_y, x1, y1], fill="#6B5D4F")
+        # tracer arcs, bright dots climbing from the ground to the drones
+        for ax0, ax1, apex in [(x0 + 30, x0 + 58, y0 + 12),
+                               (x0 + 84, x0 + 108, y0 + 8),
+                               (x0 + 122, x0 + 142, y0 + 14)]:
+            for s in range(0, 11):
+                t = s / 10.0
+                px = int(ax0 + (ax1 - ax0) * t)
+                py = int(mid_y - (mid_y - apex) * 4 * t * (1 - t))
+                d.rectangle([px, py, px + 1, py + 1],
+                            fill="#FF6B35" if s % 2 else "#FFD94D")
+        # airburst starbursts where the tracers meet the drones
+        for cx, cy in [(x0 + 58, y0 + 12), (x0 + 108, y0 + 8)]:
+            d.ellipse([cx - 6, cy - 6, cx + 6, cy + 6], outline="#FBBF24", width=1)
+            for ex, ey in [(cx - 7, cy), (cx + 7, cy), (cx, cy - 7), (cx, cy + 7),
+                           (cx - 5, cy - 5), (cx + 5, cy - 5),
+                           (cx - 5, cy + 5), (cx + 5, cy + 5)]:
+                d.line([(cx, cy), (ex, ey)], fill="#F97316", width=1)
+            d.ellipse([cx - 3, cy - 3, cx + 3, cy + 3], fill="#FFE08A")
+        # three drones with rotors + red lights, on the tracer arcs
+        for dx, dy in [(x0 + 40, y0 + 10), (x0 + 96, y0 + 10), (x0 + 132, y0 + 12)]:
+            d.line([(dx - 8, dy - 5), (dx + 8, dy - 5)], fill="#4A4038", width=1)
             d.ellipse([dx - 4, dy - 2, dx + 4, dy + 2], fill="#222222")
-        d.ellipse([x0 + 96, y0 + 26, x0 + 112, y0 + 42], fill="#C9CDD2")
-        d.ellipse([x0 + 104, y0 + 16, x0 + 120, y0 + 32], fill="#D8DBDE")
+            d.ellipse([dx + 2, dy - 3, dx + 4, dy - 1], fill="#DC2626")
     elif num == 7:  # Delta: grounded planes + board
         d.rectangle([x0, mid_y, x1, y1], fill="#9AA5AD")
         d.rectangle([x0 + 8, y0 + 8, x0 + 62, y0 + 30], fill="#1F2937")
