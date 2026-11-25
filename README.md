@@ -16,7 +16,7 @@ One 1024×1024 newspaper front page — **48 stories, 10 regions, 24 fields, 15 
 - **Region bar (10 regions, none above 8):** Europe 8 · N. America 8 · Middle East 5 · E. Asia 5 · S. Asia 4 · SE Asia 4 · Latin Am. 4 · Africa 4 · Oceania 3 · World 3. v4.1 had Europe 12 of 38 (32%); v5 caps every region at 17%.
 - **IN NUMBERS strip (7):** +31.5% Nvidia shares · 96 drones at Ukraine · 3,000+ US flights hit · 6.5 Vanuatu quake · 24 dead in the Nigeria boat sinking · $952BN Nvidia gain · 204* Sooryavanshi off 53 balls.
 - **THE DAY IN UTC (7 timed items):** 05:30 Taiex +9.0% · 06:30 Sanofi $41bn deal · 07:45 Tripoli condemns sinking · 08:00 73 of 96 drones downed · 14:00 Nvidia reinstates Huang · 16:30 NATO confirms AWACS · 21:00 Supermoon rises.
-- **3 pictorial leads, all bright, each with a big banner word:** (1) RICH scene — Ukraine sinks a Russian warship off Libya, "SHIP SUNK OFF LIBYA"; (2) REGIONAL MAP — the Strait of Hormuz, "HORMUZ ON EDGE"; (3) DATA lead — Nvidia +31.5% as a giant number with a mini bar chart and two labelled arrows, "HUANG IS BACK". No night scenes, no dark panels.
+- **3 pictorial leads, all bright, each with a big banner word:** (1) RICH scene — Ukraine sinks a Russian warship off Libya, "SHIP SUNK OFF LIBYA"; (2) REGIONAL MAP — the Strait of Hormuz, "HORMUZ ON EDGE"; (3) DATA lead — Nvidia +31.5% as a giant number with a horizontal mini bar chart and a labelled up-arrow, "HUANG IS BACK". No night scenes, no dark panels.
 - **12 mid stories with bright scene banners** (COP31 hall, NATO AWACS, Kyiv in daylight, Delta's grounded planes, warships off Taiwan, the Himalayas, Sanofi's lab, the Nigerian river boat, the Mexico desert convoy, Bougainville's parliament, Vanuatu's seismograph, and a cricket scoreboard with its own mini bar chart).
 - **Full solid world map** (not dotted) with **15 numbered pins, coloured per region**, Europe's cluster spread with thin leader lines, and a pin-colour count legend underneath. Every pin number is readable at 300 px thumbnail size.
 - **Two chart panels:** Stories by Region (vertical bars) and Markets on Tuesday (Nvidia +31.5%, Taiex +9.0%, Kospi +7.3%, Nasdaq +6.5%, S&P 500 +4.7%, Nikkei +4.2%).
@@ -76,7 +76,7 @@ Drawn (15) — leads 1–3 are the three big pictures, mids 4–15 the small one
 47. Kenya faces Sh12bn election funding gap — Daily Nation — Politics, Reported
 48. Tanzania launches '3 Zero' maternal drive — The Citizen — Health, Official
 
-Ten stories are new in v5 (39–48 except 42 is also new; the new set is 39, 40, 41, 42, 43, 44, 45, 46, 47, 48), added to fix v4.1's Europe skew — three from East Asia, three from Southeast Asia, two from Africa, one from South Asia, one from Latin America. Each was verified against a real source dated 24 November 2026 (PiQ Markets Asia-Pacific archive, The Sports Encounter, Media OutReach, Buenos Aires Herald, Daily Nation / The Star Kenya, The Citizen).
+Ten stories are new in v5 — 39, 40, 41, 42, 43, 44, 45, 46, 47, 48 — added to fix v4.1's Europe skew: three from East Asia, three from Southeast Asia, two from Africa, one from South Asia, one from Latin America. Each was verified against a real source dated 24 November 2026 (PiQ Markets Asia-Pacific archive, The Sports Encounter, Media OutReach, Buenos Aires Herald, Daily Nation / The Star Kenya, The Citizen).
 
 ## Arithmetic (checked three times in the build)
 
