@@ -1,0 +1,1 @@
+{"name":"news-image-20261124-v5-top1","private":true,"scripts":{"render":"python3 draw_news24_v5.py","start":"node main.ts"},"type":"module","version":"5.0.0"}
